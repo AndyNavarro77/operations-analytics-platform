@@ -5,4 +5,4 @@ sources:
     schema: default
     tables:
       - name: orders_raw
-        description: "Datos crudos de pedidos, envíos y clientes (DataCo Smart Supply Chain), 1 fila = 1 item de pedido"
+        description: "Raw orders, shipping, and customer data (DataCo Smart Supply Chain), 1 row = 1 order item"
