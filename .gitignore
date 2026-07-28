@@ -1,0 +1,15 @@
+# dbt
+target/
+dbt_packages/
+logs/
+
+# Variables de entorno / credenciales
+.env
+*.env
+
+# Entorno virtual
+.venv/
+
+# Sistema
+__pycache__/
+.DS_Store
