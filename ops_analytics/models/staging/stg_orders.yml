@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Pedidos limpios, 1 fila por item de pedido, sin PII"
+    columns:
+      - name: order_id
+        description: "ID del pedido"
+        tests:
+          - not_null
+
+      - name: order_item_id
+        description: "ID único del item dentro del pedido"
+        tests:
+          - not_null
+          - unique
+
+      - name: order_date
+        description: "Fecha en que se realizó el pedido"
+        tests:
+          - not_null
+
+      - name: late_delivery_risk
+        description: "Flag de riesgo de entrega tardía (0 = no, 1 = sí)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+      - name: delivery_status
+        description: "Estado de la entrega"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Advance shipping', 'Late delivery', 'Shipping canceled', 'Shipping on time']
+
+      - name: sales
+        description: "Monto de venta del item"
+        tests:
+          - not_null
