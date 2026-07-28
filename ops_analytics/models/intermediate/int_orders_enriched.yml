@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: int_orders_enriched
+    description: >
+      Staging orders enriched with delivery performance, profitability, and
+      value segmentation metrics. Note: delivery_delay_days can be positive
+      even when is_late = false, if the order was canceled rather than
+      delivered late.
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+
+      - name: delivery_delay_days
+        description: "shipping_days_real minus shipping_days_scheduled. Positive = took longer than planned."
+        tests:
+          - not_null
+
+      - name: is_late
+        description: "True only when delivery_status = 'Late delivery' (excludes canceled orders)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+      - name: order_value_segment
+        description: "Order value tier based on sales amount"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['low', 'medium', 'high']
