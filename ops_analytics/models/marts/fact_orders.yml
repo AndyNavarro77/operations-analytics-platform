@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: "Final orders fact table, one row per order item. Stable contract for BI and ML consumption."
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+
+  - name: agg_delivery_performance
+    description: "Delivery performance pre-aggregated by region and shipping mode"
+    columns:
+      - name: order_region
+        tests:
+          - not_null
+      - name: shipping_mode
+        tests:
+          - not_null
+      - name: late_rate
+        description: "Share of orders delivered late, 0 to 1"
+        tests:
+          - not_null
